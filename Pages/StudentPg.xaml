@@ -1,0 +1,47 @@
+﻿<Page x:Class="WPF.Pages.StudentPg"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="StudentPg" IsVisibleChanged="Page_IsVisibleChanged">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <DataGrid Name="dtgStudent" Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="*"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="GroupID" Binding="{Binding Group.Name}" Width="*"/>
+                <DataGridTextColumn Header="Password" Binding="{Binding Password}" Width="*"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="btnRed" Content="Редактировать" Click="btnRed_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <WrapPanel Name="wpStudent" Grid.Row="0">
+            <Label Content="Поиск" HorizontalAlignment="Left" Height="{Binding ElementName=wpStudent, Path=ActualHeight}"/>
+            <TextBox Name="txbSearch" Width="200" TextChanged="txbSearch_TextChanged"/>
+            <Label Content="Фильтр"/>
+            <ComboBox Name="cmbFill" Width="200" SelectionChanged="cmbFill_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </WrapPanel>
+        <Button Name="btnDel" Content="Удаление" Grid.Row="2" HorizontalAlignment="Left" Click="btnDel_Click"/>
+        <Button Name="btnAdd" Content="Добавление" Grid.Row="2" HorizontalAlignment="Right" Click="btnAdd_Click"/>
+    </Grid>
+</Page>
